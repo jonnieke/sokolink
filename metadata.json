@@ -1,0 +1,7 @@
+{
+  "name": "Soko Link",
+  "description": "Soko karibu nawe. An AI-powered mobile app to discover and connect with local businesses. Find contact details, services, hours, and pricing. Switch between buyer and seller views for a complete local commerce experience.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
