@@ -6,7 +6,33 @@ export default {
   ],
   theme: {
     extend: {
-       animation: {
+      colors: {
+        soko: {
+          yellow: {
+            light: '#FFF9E5', // background
+            DEFAULT: '#FFE14D', // main yellow
+            dark: '#FFD600', // button/accents
+            contrast: '#1B3A1B', // for text on yellow
+          },
+          green: {
+            light: '#A7D28D',
+            DEFAULT: '#4CAF50', // main green
+            dark: '#205522', // text
+            accent: '#388E3C', // button hover
+            contrast: '#FFF9E5', // for text on green
+          },
+          brown: {
+            light: '#E6C89F',
+            DEFAULT: '#A16943', // accent brown
+            dark: '#8B5C2A', // border/text
+            contrast: '#FFF9E5', // for text on brown
+          },
+          maize: '#FFEB7A',
+          orange: '#FFB300',
+          red: '#E53935',
+        },
+      },
+      animation: {
         blob: "blob 7s infinite",
       },
       keyframes: {

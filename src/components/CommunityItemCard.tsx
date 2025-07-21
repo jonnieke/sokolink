@@ -2,8 +2,29 @@
 
 import React from 'react';
 import type { CommunityItem } from '../types';
-import { TagIcon, MapPinIcon, MessageCircleIcon, HeartIcon } from 'lucide-react';
-import { ICONS, getIconForCategory } from '../constants';
+import { TagIcon, MapPinIcon, MessageCircleIcon, HeartIcon, MonitorIcon, SofaIcon, ShirtIcon, RefrigeratorIcon, BookIcon, PuzzleIcon, CoffeeIcon, UtensilsIcon, ShoppingBagIcon as ShopBagIcon, ScissorsIcon, WrenchIcon, PackageIcon } from 'lucide-react';
+
+// Lucide icon mapping for categories (same as BuyerView)
+const categoryIconMap: Record<string, React.ReactNode> = {
+  electronics: <MonitorIcon className="w-20 h-20 text-amber-400" />,
+  furniture: <SofaIcon className="w-20 h-20 text-amber-400" />,
+  clothing: <ShirtIcon className="w-20 h-20 text-amber-400" />,
+  appliances: <RefrigeratorIcon className="w-20 h-20 text-amber-400" />,
+  books: <BookIcon className="w-20 h-20 text-amber-400" />,
+  toys: <PuzzleIcon className="w-20 h-20 text-amber-400" />,
+  cafe: <CoffeeIcon className="w-20 h-20 text-amber-400" />,
+  restaurant: <UtensilsIcon className="w-20 h-20 text-amber-400" />,
+  shop: <ShopBagIcon className="w-20 h-20 text-amber-400" />,
+  salon: <ScissorsIcon className="w-20 h-20 text-amber-400" />,
+  services: <WrenchIcon className="w-20 h-20 text-amber-400" />,
+  other: <PackageIcon className="w-20 h-20 text-amber-400" />,
+};
+
+function getLucideCategoryIcon(category: string) {
+  if (!category) return categoryIconMap.other;
+  const key = Object.keys(categoryIconMap).find(k => category.toLowerCase().includes(k));
+  return key ? categoryIconMap[key] : categoryIconMap.other;
+}
 
 interface CommunityItemCardProps {
     item: CommunityItem;
@@ -16,17 +37,21 @@ interface CommunityItemCardProps {
 const CommunityItemCard: React.FC<CommunityItemCardProps> = ({ item, isFavorite, onStartNegotiation, onContactSeller, onToggleFavorite }) => {
     const { id, title, price, imageUrl, category, condition, location, negotiable, sellerName } = item;
         
-    const imageSrc = imageUrl || getIconForCategory(category);
+    const hasImage = Boolean(imageUrl);
 
     return (
         <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg overflow-hidden flex flex-col group transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
             <div className="relative">
                 <div className="w-full h-48 bg-slate-200 dark:bg-slate-700 flex items-center justify-center">
-                    <img 
-                        src={imageSrc} 
-                        alt={title}
-                        className="w-full h-full object-cover"
-                    />
+                    {hasImage ? (
+                        <img 
+                            src={imageUrl} 
+                            alt={title}
+                            className="w-full h-full object-cover"
+                        />
+                    ) : (
+                        getLucideCategoryIcon(category)
+                    )}
                 </div>
                  <button 
                     onClick={() => onToggleFavorite(item)} 
@@ -66,7 +91,7 @@ const CommunityItemCard: React.FC<CommunityItemCardProps> = ({ item, isFavorite,
                         onClick={() => onContactSeller(id, title)}
                         className={`w-full flex items-center justify-center text-xs font-medium bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-200 px-2 py-2 rounded-lg hover:bg-teal-200 dark:hover:bg-teal-800/50 transition-colors ${!negotiable && 'col-span-2'}`}
                       >
-                          {ICONS.message} <span className="ml-1.5">Message Seller</span>
+                          <MessageCircleIcon className="w-4 h-4" /> <span className="ml-1.5">Message Seller</span>
                       </button>
                 </div>
             </div>

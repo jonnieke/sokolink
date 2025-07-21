@@ -1,10 +1,14 @@
 
 
 import React, { useState, useRef, useMemo, useEffect } from 'react';
-import { TagIcon, LinkIcon, ImageIcon, PlusCircleIcon, DollarSignIcon, BarChart3Icon, InboxIcon, ShoppingBagIcon, Building2Icon, XIcon, CheckCircleIcon, MapPinIcon, MailIcon, ChevronDownIcon, SendIcon, EyeIcon, Trash2Icon, PackageCheckIcon, ListIcon, SparklesIcon, LayoutDashboardIcon, PhoneIcon, ClockIcon } from 'lucide-react';
+import { TagIcon, LinkIcon, ImageIcon, PlusCircleIcon, DollarSignIcon, BarChart3Icon, InboxIcon, ShoppingBagIcon, Building2Icon, XIcon, CheckCircleIcon, MapPinIcon, MailIcon, ChevronDownIcon, SendIcon, EyeIcon, Trash2Icon, PackageCheckIcon, ListIcon, SparklesIcon, LayoutDashboardIcon, PhoneIcon, ClockIcon, GlobeIcon, InstagramIcon, FacebookIcon, TwitterIcon } from 'lucide-react';
 import LocationPickerModal from '../components/modals/LocationPickerModal';
-import { ICONS, getIconForCategory } from '../constants';
-import type { CommunityItem, Conversation, Role, Business, BusinessProfile, BusinessCategory, Product, CommunityItemCategory } from '../types';
+import { getIconForCategory } from '../constants';
+
+// Use Lucide icons directly for all social icons
+const WebsiteIcon = GlobeIcon;
+const WhatsappIcon = PhoneIcon;
+import type { CommunityItem, Conversation, Business, BusinessProfile, Product, CommunityItemCategory } from '../types';
 import { BusinessCategories, CommunityItemCategories } from '../types';
 import BusinessCard from '../components/BusinessCard';
 import { getAIDescription, getAIPriceSuggestion } from '../services/geminiService';
@@ -402,35 +406,35 @@ const SellerView: React.FC<SellerViewProps> = ({
                     <div>
                         <label htmlFor="website-url" className="sr-only">Website</label>
                         <div className="relative">
-                            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">{React.cloneElement(ICONS.website, {className: "h-5 w-5 text-slate-400"})}</div>
+                            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"><WebsiteIcon className="h-5 w-5 text-slate-400" /></div>
                             <input type="url" name="website" value={localProfile.website} onChange={handleBusinessInfoChange} id="website-url" placeholder="https://mybusiness.com" className="block w-full rounded-md border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-700 pl-10 pr-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-teal-500" />
                         </div>
                     </div>
                     <div>
                         <label htmlFor="instagram-url" className="sr-only">Instagram</label>
                         <div className="relative">
-                            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">{React.cloneElement(ICONS.instagram, {className: "h-5 w-5 text-slate-400"})}</div>
+                            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">{InstagramIcon && <InstagramIcon className="h-5 w-5 text-slate-400" />}</div>
                             <input type="url" name="instagram" value={localProfile.instagram} onChange={handleBusinessInfoChange} id="instagram-url" placeholder="https://instagram.com/mybiz" className="block w-full rounded-md border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-700 pl-10 pr-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-teal-500" />
                         </div>
                     </div>
                     <div>
                         <label htmlFor="facebook-url" className="sr-only">Facebook</label>
                         <div className="relative">
-                            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">{React.cloneElement(ICONS.facebook, {className: "h-5 w-5 text-slate-400"})}</div>
+                            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">{FacebookIcon && <FacebookIcon className="h-5 w-5 text-slate-400" />}</div>
                             <input type="url" name="facebook" value={localProfile.facebook} onChange={handleBusinessInfoChange} id="facebook-url" placeholder="https://facebook.com/mybiz" className="block w-full rounded-md border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-700 pl-10 pr-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-teal-500" />
                         </div>
                     </div>
                     <div>
                         <label htmlFor="twitter-url" className="sr-only">Twitter (X)</label>
                         <div className="relative">
-                            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">{React.cloneElement(ICONS.twitter, {className: "h-5 w-5 text-slate-400"})}</div>
+                            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">{TwitterIcon && <TwitterIcon className="h-5 w-5 text-slate-400" />}</div>
                             <input type="url" name="twitter" value={localProfile.twitter} onChange={handleBusinessInfoChange} id="twitter-url" placeholder="https://x.com/mybiz" className="block w-full rounded-md border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-700 pl-10 pr-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-teal-500" />
                         </div>
                     </div>
                     <div className="sm:col-span-2">
                         <label htmlFor="whatsapp-number" className="sr-only">WhatsApp Number</label>
                         <div className="relative">
-                            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">{React.cloneElement(ICONS.whatsapp, {className: "h-5 w-5 text-slate-400"})}</div>
+                            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"><WhatsappIcon className="h-5 w-5 text-slate-400" /></div>
                             <input type="tel" name="whatsapp" value={localProfile.whatsapp} onChange={handleBusinessInfoChange} id="whatsapp-number" placeholder="WhatsApp: +254712345678" className="block w-full rounded-md border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-700 pl-10 pr-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-teal-500" />
                         </div>
                     </div>
@@ -649,13 +653,13 @@ const SellerView: React.FC<SellerViewProps> = ({
 
 
   return (
-    <div className="space-y-8">
-      <div>
+    <div className="space-y-8 w-full px-4 md:px-8 lg:px-16 xl:px-24">
+      <div className="pt-8">
         <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100">Seller Dashboard</h2>
         <p className="mt-1 text-slate-500 dark:text-slate-400">Manage your business profile and personal sales.</p>
       </div>
-      
-      <div className="border-b border-slate-200 dark:border-slate-700">
+
+      <div className="border-b border-slate-200 dark:border-slate-700 w-full">
         <nav className="-mb-px flex space-x-6" aria-label="Tabs">
           <SellerTabButton
             icon={<LayoutDashboardIcon className="w-5 h-5 mr-2" />}
@@ -678,19 +682,19 @@ const SellerView: React.FC<SellerViewProps> = ({
         </nav>
       </div>
 
-      <div className="mt-6">
+      <div className="mt-6 w-full">
         {renderContent()}
       </div>
 
       {isLocationPickerOpen && (
-          <LocationPickerModal
-              isOpen={isLocationPickerOpen}
-              onClose={() => setIsLocationPickerOpen(false)}
-              onLocationSelect={(lat, lng) => {
-                  setLocalProfile(prev => ({ ...prev, address: `Lat: ${lat.toFixed(5)}, Lng: ${lng.toFixed(5)}` }));
-                  setIsLocationPickerOpen(false);
-              }}
-          />
+        <LocationPickerModal
+          isOpen={isLocationPickerOpen}
+          onClose={() => setIsLocationPickerOpen(false)}
+          onLocationSelect={(lat, lng) => {
+            setLocalProfile(prev => ({ ...prev, address: `Lat: ${lat.toFixed(5)}, Lng: ${lng.toFixed(5)}` }));
+            setIsLocationPickerOpen(false);
+          }}
+        />
       )}
     </div>
   );

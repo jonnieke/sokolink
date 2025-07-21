@@ -1,11 +1,12 @@
-
-
 import { GoogleGenAI, Type } from "@google/genai";
 import type { Business, CommunityItem } from '../types';
 import { BusinessCategories, CommunityItemCategories } from "../types";
 
-// Get the API key from environment variables.
-const API_KEY = process.env.API_KEY;
+// Vite env type declaration should be in a global .d.ts file, not here.
+
+// Get the API key from environment variables (Vite style).
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+console.log('VITE_GEMINI_API_KEY at runtime:', API_KEY);
 
 // Initialize the AI client only if the key exists.
 const ai = API_KEY ? new GoogleGenAI({ apiKey: API_KEY }) : null;
@@ -78,7 +79,7 @@ export const findBusinesses = async (businessType: string, location: string): Pr
       },
     });
 
-    const jsonText = response.text.trim();
+    const jsonText = response.text ? response.text.trim() : "";
     if (!jsonText) {
         console.error("Gemini API returned an empty response for businesses.");
         return [];
@@ -114,7 +115,7 @@ export const findCommunityItems = async (location: string): Promise<Omit<Communi
             },
         });
 
-        const jsonText = response.text.trim();
+        const jsonText = response.text ? response.text.trim() : "";
         if (!jsonText) {
             console.error("Gemini API returned an empty response for community items.");
             return [];
@@ -158,7 +159,7 @@ export const getNegotiationTip = async (itemName: string, userMessage: string): 
             model: "gemini-2.5-flash",
             contents: prompt,
         });
-        return response.text;
+        return response.text ?? "";
     } catch (error) {
         console.error("Error fetching negotiation tip from Gemini API:", error);
         return "Sorry, I couldn't get a tip right now. The AI might be busy. Please try again in a moment. 🙏";
@@ -178,7 +179,7 @@ export const getAIPriceSuggestion = async (itemName: string, itemDescription: st
     `;
     try {
         const response = await ai!.models.generateContent({ model: "gemini-2.5-flash", contents: prompt });
-        const price = response.text.trim().replace(/[^0-9]/g, ''); // Sanitize to ensure only numbers are returned
+        const price = response.text ? response.text.trim().replace(/[^0-9]/g, '') : ""; // Sanitize to ensure only numbers are returned
         return price || "0";
     } catch (error) {
         console.error("Error fetching price suggestion from Gemini API:", error);
@@ -196,7 +197,7 @@ export const getAIDescription = async (itemName: string): Promise<string> => {
     `;
     try {
         const response = await ai!.models.generateContent({ model: "gemini-2.5-flash", contents: prompt });
-        return response.text.trim();
+        return response.text ? response.text.trim() : "";
     } catch (error) {
         console.error("Error fetching description from Gemini API:", error);
         return "";

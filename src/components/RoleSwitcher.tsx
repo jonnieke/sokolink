@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Role } from '../types';
+import { Role } from '../../types';
 import { UserIcon, StoreIcon } from 'lucide-react';
 
 interface RoleSwitcherProps {

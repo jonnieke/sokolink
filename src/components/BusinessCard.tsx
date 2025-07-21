@@ -1,6 +1,8 @@
 
 
 import React from 'react';
+// Ensure the correct path to your types file; adjust as needed if the file is in a different location.
+// Update the path below to the actual location of your types file, e.g., './types' or '../../types'
 import type { Business, Product } from '../types';
 import { ICONS, getIconForCategory } from '../constants';
 import { MessageCircleIcon, ListIcon, HeartIcon } from 'lucide-react';
@@ -47,22 +49,22 @@ const BusinessCard: React.FC<BusinessCardProps> = ({ business, isFavorite, onSta
             <h3 className="font-bold text-lg text-slate-800 dark:text-slate-100 pr-8">{name}</h3>
         </div>
         <div className="mt-4 space-y-3 pl-11">
-          <InfoRow icon={ICONS.location}>
+          <InfoRow icon={<ICONS.location />}>
             <a href={`https://maps.google.com/?q=${encodeURIComponent(address)}`} target="_blank" rel="noopener noreferrer" className="hover:text-teal-600 transition-colors">{address}</a>
           </InfoRow>
-          <InfoRow icon={ICONS.phone}>
+          <InfoRow icon={<ICONS.phone />}>
             <a href={`tel:${phone}`} className="hover:text-teal-600 transition-colors">{phone}</a>
           </InfoRow>
-          <InfoRow icon={ICONS.clock}>{hours}</InfoRow>
+          <InfoRow icon={<ICONS.clock />}>{hours}</InfoRow>
           <div className="flex flex-wrap items-center gap-2 pt-2">
             {delivery && (
                 <span className="flex items-center text-xs font-medium bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-200 px-2 py-1 rounded-full">
-                    {ICONS.delivery} <span className="ml-1.5">Delivery Available</span>
+                    <ICONS.delivery /> <span className="ml-1.5">Delivery Available</span>
                 </span>
             )}
              {priceRange && (
                 <span className="flex items-center text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-200 px-2 py-1 rounded-full">
-                    {ICONS.price} <span className="ml-1.5">{priceRange}</span>
+                    <ICONS.price /> <span className="ml-1.5">{priceRange}</span>
                 </span>
             )}
              {negotiable && (
@@ -77,7 +79,7 @@ const BusinessCard: React.FC<BusinessCardProps> = ({ business, isFavorite, onSta
                 onClick={() => onContactSeller(business.id, business.name)}
                 className="flex items-center text-xs font-medium bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-200 px-2 py-1 rounded-full hover:bg-teal-200 dark:hover:bg-teal-800/50 transition-colors"
               >
-                  {ICONS.message} <span className="ml-1.5">Message Seller</span>
+                  <ICONS.message /> <span className="ml-1.5">Message Seller</span>
               </button>
           </div>
         </div>
@@ -98,11 +100,11 @@ const BusinessCard: React.FC<BusinessCardProps> = ({ business, isFavorite, onSta
       {socialMedia && Object.values(socialMedia).some(v => v) && (
         <div className="px-5 py-3 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-700">
             <div className="flex items-center justify-end space-x-4">
-                {socialMedia.website && <a href={socialMedia.website} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-teal-500 transition-colors">{ICONS.website}</a>}
-                {socialMedia.instagram && <a href={socialMedia.instagram} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-500 transition-colors">{ICONS.instagram}</a>}
-                {socialMedia.facebook && <a href={socialMedia.facebook} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-500 transition-colors">{ICONS.facebook}</a>}
-                {socialMedia.twitter && <a href={socialMedia.twitter} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-sky-500 transition-colors">{ICONS.twitter}</a>}
-                {socialMedia.whatsapp && <a href={`https://wa.me/${socialMedia.whatsapp.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-green-500 transition-colors">{ICONS.whatsapp}</a>}
+                {socialMedia.website && <a href={socialMedia.website} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-teal-500 transition-colors"><ICONS.website /></a>}
+                {socialMedia.instagram && <a href={socialMedia.instagram} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-500 transition-colors"><ICONS.instagram /></a>}
+                {socialMedia.facebook && <a href={socialMedia.facebook} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-500 transition-colors"><ICONS.facebook /></a>}
+                {socialMedia.twitter && <a href={socialMedia.twitter} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-sky-500 transition-colors"><ICONS.twitter /></a>}
+                {socialMedia.whatsapp && <a href={`https://wa.me/${socialMedia.whatsapp.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-green-500 transition-colors"><ICONS.whatsapp /></a>}
             </div>
         </div>
       )}

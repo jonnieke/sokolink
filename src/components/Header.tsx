@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { APP_TITLE } from '../constants';
-import { Role, type Conversation, type Business, type CommunityItem } from '../types';
+import { Role, type Conversation, type Business, type CommunityItem } from '../../types';
 import { StoreIcon, InboxIcon, HeartIcon } from 'lucide-react';
 import BuyerInboxModal from './modals/BuyerInboxModal';
 import FavoritesModal from './modals/FavoritesModal';
@@ -43,19 +43,23 @@ const Header: React.FC<HeaderProps> = ({
       <header className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm shadow-sm sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-700">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            <div className="flex items-center space-x-3">
-              <div className="p-2 bg-teal-500 rounded-full">
+            <button
+              className="flex items-center space-x-3 focus:outline-none group"
+              onClick={() => window.location.pathname = '/'}
+              aria-label="Go to homepage"
+            >
+              <div className="p-2 bg-teal-500 rounded-full group-hover:scale-105 transition-transform">
                 <StoreIcon className="text-white w-6 h-6" />
               </div>
-              <div>
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-teal-600 dark:text-teal-400 tracking-tight">
+              <div className="text-left">
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-teal-600 dark:text-teal-400 tracking-tight group-hover:underline">
                   {APP_TITLE}
                 </h1>
                 <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">
                   Your AI-powered market guide.
                 </p>
               </div>
-            </div>
+            </button>
             <div className="flex items-center space-x-2">
               <RoleSwitcher currentRole={currentRole} onRoleChange={onRoleChange} />
               {currentRole === Role.Buyer && (

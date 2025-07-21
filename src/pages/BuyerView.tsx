@@ -8,9 +8,29 @@ import NegotiationModal from '../components/modals/NegotiationModal';
 import ContactSellerModal from '../components/modals/ContactSellerModal';
 import CommunityItemCard from '../components/CommunityItemCard';
 import type { Business, CommunityItem } from '../types';
-import { ICONS, getIconForCategory } from '../constants';
-import { StoreIcon, ShoppingBagIcon, SearchIcon } from 'lucide-react';
+import { StoreIcon, ShoppingBagIcon, SearchIcon, MonitorIcon, SofaIcon, ShirtIcon, RefrigeratorIcon, BookIcon, PuzzleIcon, CoffeeIcon, UtensilsIcon, ShoppingBagIcon as ShopBagIcon, ScissorsIcon, WrenchIcon, PackageIcon } from 'lucide-react';
 
+// Lucide icon mapping for categories
+const categoryIconMap: Record<string, React.ReactNode> = {
+  electronics: <MonitorIcon className="w-7 h-7 text-amber-400" />, 
+  furniture: <SofaIcon className="w-7 h-7 text-amber-400" />, 
+  clothing: <ShirtIcon className="w-7 h-7 text-amber-400" />, 
+  appliances: <RefrigeratorIcon className="w-7 h-7 text-amber-400" />, 
+  books: <BookIcon className="w-7 h-7 text-amber-400" />, 
+  toys: <PuzzleIcon className="w-7 h-7 text-amber-400" />, 
+  cafe: <CoffeeIcon className="w-7 h-7 text-amber-400" />, 
+  restaurant: <UtensilsIcon className="w-7 h-7 text-amber-400" />, 
+  shop: <ShopBagIcon className="w-7 h-7 text-amber-400" />, 
+  salon: <ScissorsIcon className="w-7 h-7 text-amber-400" />, 
+  services: <WrenchIcon className="w-7 h-7 text-amber-400" />, 
+  other: <PackageIcon className="w-7 h-7 text-amber-400" />, 
+};
+
+function getLucideCategoryIcon(category: string) {
+  if (!category) return categoryIconMap.other;
+  const key = Object.keys(categoryIconMap).find(k => category.toLowerCase().includes(k));
+  return key ? categoryIconMap[key] : categoryIconMap.other;
+}
 
 interface BuyerViewProps {
   onSearch: (businessType: string, location: string) => void;
@@ -88,7 +108,7 @@ const BuyerView: React.FC<BuyerViewProps> = ({
   
 
   const renderTabs = () => (
-    <div className="mb-6 flex p-1 bg-slate-200 dark:bg-slate-700/50 rounded-lg">
+    <div className="mb-6 flex p-1 bg-white dark:bg-slate-800 rounded-lg border-b-2 border-teal-500 shadow">
       <TabButton
         icon={<StoreIcon className="w-5 h-5 mr-2" />}
         label="Local Businesses"
@@ -107,7 +127,7 @@ const BuyerView: React.FC<BuyerViewProps> = ({
   );
   
   const SokoMtaaniFilters = () => (
-    <div className="mb-6 p-4 bg-white dark:bg-slate-800 rounded-xl shadow-lg space-y-4">
+    <div className="mb-6 p-4 bg-white dark:bg-slate-800 rounded-xl shadow-lg space-y-4 border-l-4 border-amber-500">
         <div className="relative">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
               <SearchIcon className="h-5 w-5 text-slate-400" />
@@ -117,7 +137,7 @@ const BuyerView: React.FC<BuyerViewProps> = ({
               value={sokoSearchQuery}
               onChange={(e) => setSokoSearchQuery(e.target.value)}
               placeholder="Search items in Soko Mtaani..."
-              className="block w-full rounded-md border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-700 pl-10 pr-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
+              className="block w-full rounded-md border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-700 pl-10 pr-3 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
             />
         </div>
         <div className="flex flex-wrap gap-2">
@@ -133,7 +153,7 @@ const BuyerView: React.FC<BuyerViewProps> = ({
                     onClick={() => setActiveCategory(category)}
                     className={`flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full transition-colors ${activeCategory === category ? 'bg-amber-500 text-white' : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-600'}`}
                 >
-                    <img src={getIconForCategory(category)} alt={category} className="w-4 h-4" />
+                    {getLucideCategoryIcon(category)}
                     {category}
                 </button>
             ))}
@@ -154,7 +174,7 @@ const BuyerView: React.FC<BuyerViewProps> = ({
         return (
             <div className="text-center p-12 bg-white dark:bg-slate-800 rounded-xl shadow-lg">
                 <div className="flex justify-center items-center mx-auto h-16 w-16 rounded-full bg-teal-100 dark:bg-teal-900/50 mb-4">
-                   {React.cloneElement(ICONS.search, { className: "h-8 w-8 text-teal-600 dark:text-teal-400" })}
+                   <SearchIcon className="h-8 w-8 text-teal-600 dark:text-teal-400" />
                 </div>
                 <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100">Tafuta Biashara Karibu Nawe</h3>
                 <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
@@ -211,9 +231,11 @@ const BuyerView: React.FC<BuyerViewProps> = ({
   };
 
   return (
-    <div className="space-y-6">
-      <SearchBar onSearch={onSearch} isLoading={isLoading} />
-      <div className="mt-6">
+    <div className="space-y-6 min-h-screen bg-white dark:bg-slate-900 w-full px-4 md:px-8 lg:px-16 xl:px-24">
+      <div className="w-full py-8 px-2 bg-teal-600 text-white shadow-md">
+        <SearchBar onSearch={onSearch} isLoading={isLoading} />
+      </div>
+      <div className="mt-6 w-full">
         {(searched || availableCommunityItems.length > 0) && hasAnyResults && renderTabs()}
         {renderContent()}
       </div>
