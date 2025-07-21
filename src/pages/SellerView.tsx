@@ -1,7 +1,7 @@
 
 
 import React, { useState, useRef, useMemo, useEffect } from 'react';
-import { TagIcon, LinkIcon, ImageIcon, PlusCircleIcon, DollarSignIcon, BarChart3Icon, InboxIcon, ShoppingBagIcon, Building2Icon, XIcon, CheckCircleIcon, MapPinIcon, MailIcon, ChevronDownIcon, SendIcon, EyeIcon, Trash2Icon, PackageCheckIcon, ListIcon, SparklesIcon, LayoutDashboardIcon, PhoneIcon, ClockIcon, GlobeIcon, InstagramIcon, FacebookIcon, TwitterIcon } from 'lucide-react';
+import { TagIcon, ImageIcon, PlusCircleIcon, BarChart3Icon, InboxIcon, ShoppingBagIcon, Building2Icon, XIcon, CheckCircleIcon, MapPinIcon, MailIcon, ChevronDownIcon, SendIcon, EyeIcon, Trash2Icon, PackageCheckIcon, ListIcon, SparklesIcon, LayoutDashboardIcon, PhoneIcon, ClockIcon, GlobeIcon, InstagramIcon, FacebookIcon, TwitterIcon } from 'lucide-react';
 import LocationPickerModal from '../components/modals/LocationPickerModal';
 import { getIconForCategory } from '../constants';
 

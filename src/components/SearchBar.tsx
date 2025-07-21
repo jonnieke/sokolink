@@ -26,7 +26,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, isLoading }) => {
           </label>
           <div className="relative">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              {ICONS.search}
+              {ICONS.search && <ICONS.search />}
             </div>
             <input
               type="text"
@@ -44,7 +44,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, isLoading }) => {
           </label>
           <div className="relative">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              {ICONS.location}
+              {ICONS.location && <ICONS.location />}
             </div>
             <input
               type="text"

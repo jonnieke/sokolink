@@ -11,7 +11,7 @@ interface BusinessCardProps {
   business: Business;
   isFavorite: boolean;
   onStartNegotiation: (name: string) => void;
-  onContactSeller: (id: string, name: string) => void;
+  onContactSeller: (id: string, name: string) => void; // id is required for handler, usage is valid
   onToggleFavorite: (business: Business) => void;
 }
 
@@ -30,7 +30,7 @@ const ProductListItem: React.FC<{ product: Product }> = ({ product }) => (
 );
 
 const BusinessCard: React.FC<BusinessCardProps> = ({ business, isFavorite, onStartNegotiation, onContactSeller, onToggleFavorite }) => {
-  const { id, name, address, phone, hours, delivery, priceRange, negotiable, socialMedia, category, products } = business;
+  const { name, address, phone, hours, delivery, priceRange, negotiable, socialMedia, category, products } = business;
 
   const categoryIcon = getIconForCategory(category);
   
